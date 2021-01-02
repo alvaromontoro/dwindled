@@ -1,0 +1,7 @@
+spec:
+  name: dwindle
+  services:
+    - name: web
+      git:
+        branch: main
+        repo_clone_url: https://github.com/alvaromontoro/dwindled.git
