@@ -1,0 +1,36 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-height: 100vh;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+.a11y-hidden {
+  position: absolute;
+  display: block;
+  width: 1px;
+  height: 1px;
+  left: -1000in;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.a11y-focusable:focus {
+  display: initial;
+  width: auto;
+  height: auto;
+  left: auto;
+  overflow: initial;
+  clip: initial;
+  z-index: 1;
+}
