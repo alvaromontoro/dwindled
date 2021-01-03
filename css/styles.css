@@ -97,6 +97,7 @@ footer {
   resize: none;
   overflow: auto;
   color: #222;
+  margin: 0; /* Firefox alignment issue! */
 }
 
 #result.processed {
