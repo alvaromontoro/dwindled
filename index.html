@@ -29,12 +29,12 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <a href="#main" class="a11y-hidden a11y-focusable">Skip to contnet</a>
+    <a href="#site-title" class="a11y-hidden a11y-focusable">Skip to contnet</a>
     <header>
-      <h1>Dwindle</h1>
+      <h1 id="site-title" tabindex="-1">Dwindle</h1>
     </header>
     <main>
-      <div class="container" id="main" tabindex="-1">
+      <div class="container">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna 
           aliqua. Vulputate sapien nec sagittis aliquam malesuada bibendum arcu. Pellentesque habitant morbi tristique senectus et
@@ -43,13 +43,15 @@
         </p>
         <div class="form-control">
           <textarea name="text" id="text" aria-label="Initial text"></textarea>
-          <button id="dwindle-button">Dwindle</button>
-          <textarea name="result" id="result" aria-label="Transformed text" readonly></textarea>
+          <div class="count">Characters: <span id="text-count">0</span>.</div>
+          <button id="dwindle-button"><span>Dwindle</span></button>
+          <div id="result" tabindex="-1"></div>
+          <div class="count">Characters: <span id="result-count">0</span>.</div>
         </div>
       </div>
     </main>
     <footer>
-      2020 &copy; &Aacute;lvaro Montoro.
+      2020 &copy;&nbsp;<a href="https://alvaromontoro.com/">&Aacute;lvaro Montoro</a>.
     </footer>
   </body>
 </html>

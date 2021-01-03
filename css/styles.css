@@ -4,6 +4,9 @@ body {
   padding: 0;
   border: 0;
   min-height: 100vh;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  color: #222;
 }
 
 body {
@@ -13,6 +16,38 @@ body {
 
 main {
   flex: 1;
+}
+
+p {
+  max-width: 60ch;
+  line-height: 1.625rem;
+  font-size: 1.125rem;
+}
+
+header {
+  position: sticky;
+  height: 3rem;
+  margin-top: 5rem;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  margin: 0 1rem;
+  font-size: 4rem;
+  font-weight: 900;
+  text-transform: lowercase;
+}
+
+footer {
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  padding: 0 1rem;
 }
 
 .a11y-hidden {
@@ -33,4 +68,92 @@ main {
   overflow: initial;
   clip: initial;
   z-index: 1;
+}
+
+.container {
+  width: 90%;
+  max-width: 900px;
+  margin: auto auto;
+}
+
+.form-control {
+  display: grid;
+  position: relative;
+}
+
+#text,
+#result {
+  width: 100%;
+  border: 1px solid #bbb;
+  box-sizing: border-box;
+  padding: 1rem;
+  font-size: 1.25rem;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  border-radius: 0.125rem;
+  line-height: 1.5rem;
+  height: 9.5rem;
+  white-space: pre-wrap;
+  resize: none;
+  overflow: auto;
+  color: #222;
+}
+
+#result.processed {
+  background: #f8f8f8;
+  color: #111;
+}
+
+#dwindle-button {
+  margin: 0.5rem 0;
+}
+
+.count {
+  font-size: 0.75rem;
+  color: #444;
+  text-align: right;
+  line-height: 1rem;
+  height: 1rem;
+}
+
+@media all and (min-width: 600px) {
+  .form-control {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #dwindle-button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transform: translate(-50%, calc(-50% - 0.5rem));
+    z-index: 1;
+    border-radius: 50%;
+    border: 1px solid #bbb;
+    width: 4rem;
+    height: 4rem;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 0;
+    text-align: center;
+    margin: 0;
+    background: white;
+  }
+
+  #text {
+    border-radius: 0.125rem 0 0 0.125rem;
+    padding-right: 2.5rem;
+    height: 15.5rem;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  #result {
+    border-radius: 0 0.125rem 0.125rem 0;
+    padding-left: 2.5rem;
+    height: 15.5rem;
+    border-left: 0;
+    grid-column: 2;
+    grid-row: 1;
+  }
 }
