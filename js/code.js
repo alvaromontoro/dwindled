@@ -9,7 +9,7 @@ const dwindle = {
   },
   language: "en",
   languages: ["en"],
-  types: ["numbers", "ordinals"],
+  types: ["numbers", "ordinals", "popular"],
   loaded: 0,
   data: {},
   // load ALL the data from the JSON files
