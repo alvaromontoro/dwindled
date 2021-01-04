@@ -39,25 +39,28 @@ const dwindle = {
   },
   // actual replacement function!
   replace: function (text, language, type) {
-    const dictionary = dwindle.data[language][type];
-    if (dictionary) {
-      const keys = Object.keys(dictionary);
-      for (let x = 0; x < keys.length; x++) {
-        const pattern = ` ${keys[x]} `;
-        const regexp = new RegExp(pattern, "gi");
-        text = text.replace(regexp, ` ${dictionary[keys[x]]} `);
+    if (dwindle.data && dwindle.data[language] && dwindle.data[language][type]) {
+      const dictionary = dwindle.data[language][type];
+      if (dictionary) {
+        const keys = Object.keys(dictionary);
+        for (let x = 0; x < keys.length; x++) {
+          const pattern = ` ${keys[x]} `;
+          const regexp = new RegExp(pattern, "gi");
+          text = text.replace(regexp, ` ${dictionary[keys[x]]} `);
+        }
       }
     }
     return text;
   },
   // the reduction/dwindling function
   dwindle: function (text) {
+    text = ` ${text} `;
     for (let x = 0; x < dwindle.types.length; x++) {
       if (text.length > 280) {
         text = dwindle.replace(text, dwindle.language, dwindle.types[x]);
       }
     }
-    return text;
+    return text.trim();
   },
   // component initialization: add events, load data, etc.
   init: function () {
