@@ -8,6 +8,7 @@ const dwindle = {
     toCount: document.querySelector("#result-count"),
     bubble: document.querySelector("#replacement-info"),
     screenreader: document.querySelector("#screen-reader"),
+    tweetButton: document.querySelector("#tweet-button")
   },
   language: "en",
   languages: ["en"],
@@ -60,7 +61,7 @@ const dwindle = {
   },
   // the reduction/dwindling function
   dwindle: function (text) {
-    text = ` ${text} `;
+    text = ` ${text.replace(/\</g, "&lt;").replace(/\>/g, "&gt;")} `;
     for (let x = 0; x < this.types.length; x++) {
       if (text.length > 280) {
         text = this.replace(text, this.language, this.types[x]);
@@ -80,6 +81,12 @@ const dwindle = {
         this.elements.toBox.classList.add("processed");
         this.elements.toCount.textContent = this.elements.toBox.textContent.length;
         this.elements.toBox.focus();
+        if (this.elements.toBox.textContent.length <= 280) {
+          this.elements.tweetButton.setAttribute("href", `https://twitter.com/intent/tweet?text=${encodeURI(this.elements.toBox.textContent.trim())}`);
+          this.elements.tweetButton.style.visibility = "visible";
+        } else {
+          document.querySelector("#tweet-button").style.visibility = "hidden";
+        }
       } else {
         this.elements.toBox.innerHTML = "";
         this.elements.toBox.classList.remove("processed");
