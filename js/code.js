@@ -85,12 +85,13 @@ const dwindle = {
           this.elements.tweetButton.setAttribute("href", `https://twitter.com/intent/tweet?text=${encodeURI(this.elements.toBox.textContent.trim())}`);
           this.elements.tweetButton.style.visibility = "visible";
         } else {
-          document.querySelector("#tweet-button").style.visibility = "hidden";
+          this.elements.tweetButton.style.visibility = "hidden";
         }
       } else {
         this.elements.toBox.innerHTML = "";
         this.elements.toBox.classList.remove("processed");
         this.elements.toCount.textContent = "0";
+        this.elements.tweetButton.style.visibility = "hidden";
       }
     });
 
