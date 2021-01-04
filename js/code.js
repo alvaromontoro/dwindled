@@ -16,20 +16,20 @@ const dwindle = {
   loadData: function () {
     // I was going to use for...of, but it doesn't work on IE
     console.group("Loading replacement data");
-    for (let x = 0; x < dwindle.languages.length; x++) {
-      const lang = dwindle.languages[x];
-      for (let y = 0; y < dwindle.types.length; y++) {
-        const type = dwindle.types[y];
+    for (let x = 0; x < this.languages.length; x++) {
+      const lang = this.languages[x];
+      for (let y = 0; y < this.types.length; y++) {
+        const type = this.types[y];
         console.info(`Loading ${lang}/${type}...`);
         fetch(`./data/${lang}/${type}.json`)
           .then(response => {
             return response.json();
           })
           .then(data => {
-            if (!dwindle.data[lang]) { dwindle.data[lang] = {} }
-            dwindle.data[lang][type] = data;
-            dwindle.loaded++;
-            if (dwindle.loaded === dwindle.languages.length * dwindle.types.length) {
+            if (!this.data[lang]) { this.data[lang] = {} }
+            this.data[lang][type] = data;
+            this.loaded++;
+            if (this.loaded === this.languages.length * this.types.length) {
               console.groupEnd();
               console.info("%cAll data loaded successfully!", "color:green;");
             }
@@ -39,12 +39,12 @@ const dwindle = {
   },
   // actual replacement function!
   replace: function (text, language, type) {
-    if (dwindle.data && dwindle.data[language] && dwindle.data[language][type]) {
-      const dictionary = dwindle.data[language][type];
+    if (this.data && this.data[language] && this.data[language][type]) {
+      const dictionary = this.data[language][type];
       if (dictionary) {
         const keys = Object.keys(dictionary);
         for (let x = 0; x < keys.length; x++) {
-          const group = "([ \\r\\n\\s\\.\\-\\+!@#$%^&*,])";
+          const group = "([ \\r\\n\\s\\.\\-\\+\\?¡¿!@#$%^&*,])";
           const pattern = `${group}${keys[x]}${group}`;
           const regexp = new RegExp(pattern, "gi");
           text = text.replace(regexp, function (match, group1, group2) {
@@ -58,34 +58,34 @@ const dwindle = {
   // the reduction/dwindling function
   dwindle: function (text) {
     text = ` ${text} `;
-    for (let x = 0; x < dwindle.types.length; x++) {
+    for (let x = 0; x < this.types.length; x++) {
       if (text.length > 280) {
-        text = dwindle.replace(text, dwindle.language, dwindle.types[x]);
+        text = this.replace(text, this.language, this.types[x]);
       }
     }
     return text.trim();
   },
   // component initialization: add events, load data, etc.
   init: function () {
-    dwindle.loadData();
+    this.loadData();
 
-    dwindle.elements.button.addEventListener("click", function (e) {
-      const originalText = dwindle.elements.fromBox.value.trim();
+    this.elements.button.addEventListener("click", () => {
+      const originalText = this.elements.fromBox.value.trim();
       if (originalText !== "") {
-        const transformedText = dwindle.dwindle(originalText);
-        dwindle.elements.toBox.innerHTML = transformedText;
-        dwindle.elements.toBox.classList.add("processed");
-        dwindle.elements.toCount.textContent = dwindle.elements.toBox.textContent.length;
-        dwindle.elements.toBox.focus();
+        const transformedText = this.dwindle(originalText);
+        this.elements.toBox.innerHTML = transformedText;
+        this.elements.toBox.classList.add("processed");
+        this.elements.toCount.textContent = this.elements.toBox.textContent.length;
+        this.elements.toBox.focus();
       } else {
-        dwindle.elements.toBox.innerHTML = "";
-        dwindle.elements.toBox.classList.remove("processed");
-        dwindle.elements.toCount.textContent = "0";
+        this.elements.toBox.innerHTML = "";
+        this.elements.toBox.classList.remove("processed");
+        this.elements.toCount.textContent = "0";
       }
     });
 
-    dwindle.elements.fromBox.addEventListener("input", function () {
-      dwindle.elements.fromCount.textContent = dwindle.elements.fromBox.value.length;
+    this.elements.fromBox.addEventListener("input", () => {
+      this.elements.fromCount.textContent = this.elements.fromBox.value.length;
     })
   }
 }
