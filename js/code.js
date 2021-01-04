@@ -7,8 +7,9 @@ const dwindle = {
     fromCount: document.querySelector("#text-count"),
     toCount: document.querySelector("#result-count")
   },
+  language: "en",
   languages: ["en"],
-  types: ["numbers", "ordinals"],
+  types: ["numbers", "ordinals", "popular", "corporations"],
   loaded: 0,
   data: {},
   // load ALL the data from the JSON files
@@ -20,7 +21,7 @@ const dwindle = {
       for (let y = 0; y < dwindle.types.length; y++) {
         const type = dwindle.types[y];
         console.info(`Loading ${lang}/${type}...`);
-        fetch(`./js/${lang}/${type}.json`)
+        fetch(`./data/${lang}/${type}.json`)
           .then(response => {
             return response.json();
           })
@@ -36,9 +37,33 @@ const dwindle = {
       }
     }
   },
+  // actual replacement function!
+  replace: function (text, language, type) {
+    if (dwindle.data && dwindle.data[language] && dwindle.data[language][type]) {
+      const dictionary = dwindle.data[language][type];
+      if (dictionary) {
+        const keys = Object.keys(dictionary);
+        for (let x = 0; x < keys.length; x++) {
+          const group = "([ \\r\\n\\s\\.\\-\\+\\?!¡¿@#$%^&*,])";
+          const pattern = `${group}${keys[x]}${group}`;
+          const regexp = new RegExp(pattern, "gi");
+          text = text.replace(regexp, function (match, group1, group2) {
+            return `${group1}${dictionary[keys[x]]}${group2}`;
+          });
+        }
+      }
+    }
+    return text;
+  },
   // the reduction/dwindling function
   dwindle: function (text) {
-    return text.replace(/ one /ig, " <span class='key' data-original='one'>1</span> ");
+    text = ` ${text} `;
+    for (let x = 0; x < dwindle.types.length; x++) {
+      if (text.length > 280) {
+        text = dwindle.replace(text, dwindle.language, dwindle.types[x]);
+      }
+    }
+    return text.trim();
   },
   // component initialization: add events, load data, etc.
   init: function () {
@@ -51,6 +76,7 @@ const dwindle = {
         dwindle.elements.toBox.innerHTML = transformedText;
         dwindle.elements.toBox.classList.add("processed");
         dwindle.elements.toCount.textContent = dwindle.elements.toBox.textContent.length;
+        dwindle.elements.toBox.focus();
       } else {
         dwindle.elements.toBox.innerHTML = "";
         dwindle.elements.toBox.classList.remove("processed");
