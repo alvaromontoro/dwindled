@@ -48,7 +48,8 @@ const dwindle = {
           const pattern = `${group}${keys[x]}${group}`;
           const regexp = new RegExp(pattern, "gi");
           text = text.replace(regexp, function (match, group1, group2) {
-            return `${group1}${dictionary[keys[x]]}${group2}`;
+            const remediate = match.substring(group1.length, match.length - group1.length - group2.length + 1);
+            return `${group1}<span class="key" data-original="${remediate}" data-change="${dictionary[keys[x]]}">${dictionary[keys[x]]}</span>${group2}`;
           });
         }
       }
