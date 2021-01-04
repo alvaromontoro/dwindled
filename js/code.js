@@ -5,7 +5,9 @@ const dwindle = {
     fromBox: document.querySelector("#text"),
     toBox: document.querySelector("#result"),
     fromCount: document.querySelector("#text-count"),
-    toCount: document.querySelector("#result-count")
+    toCount: document.querySelector("#result-count"),
+    bubble: document.querySelector("#replacement-info"),
+    screenreader: document.querySelector("#screen-reader"),
   },
   language: "en",
   languages: ["en"],
@@ -49,7 +51,7 @@ const dwindle = {
           const regexp = new RegExp(pattern, "gi");
           text = text.replace(regexp, function (match, group1, group2) {
             const remediate = match.substring(group1.length, match.length - group1.length - group2.length + 1);
-            return `${group1}<span class="key" data-original="${remediate}" data-change="${dictionary[keys[x]]}">${dictionary[keys[x]]}</span>${group2}`;
+            return `${group1}<button class="key" tabindex="0" data-original="${remediate}" data-change="${dictionary[keys[x]]}">${dictionary[keys[x]]}</button>${group2}`;
           });
         }
       }
@@ -87,7 +89,32 @@ const dwindle = {
 
     this.elements.fromBox.addEventListener("input", () => {
       this.elements.fromCount.textContent = this.elements.fromBox.value.length;
-    })
+    });
+
+    this.elements.toBox.addEventListener('click', (e) => {
+      if (e.target.className.toLowerCase() === 'key') {
+        const key = e.target;
+        const coordinates = key.getBoundingClientRect();
+        this.elements.bubble.querySelector("#replacement-info-original").textContent = key.dataset.original;
+        this.elements.bubble.querySelector("#replacement-info-change").textContent = key.dataset.change;
+        this.elements.bubble.style = `top: ${coordinates.top + window.scrollY}px; left: ${coordinates.left}px; display: block;`;
+        this.elements.screenreader.textContent = this.elements.bubble.textContent;
+        setTimeout(() => { this.elements.screenreader.textContent = ""; }, 1000);
+      }
+
+      e.target.onblur = () => {
+        this.elements.bubble.style = "";
+        e.target.onblur = "";
+      }
+    });
+
+    window.addEventListener("click", (e) => {
+      if (e.target.className.toLowerCase() !== 'key') {
+        this.elements.bubble.style = "";
+      }
+    });
+    window.addEventListener("scroll", () => { this.elements.bubble.style = ""; });
+    window.addEventListener("resize", () => { this.elements.bubble.style = ""; });
   }
 }
 

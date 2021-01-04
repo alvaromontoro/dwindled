@@ -125,6 +125,12 @@ footer {
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   position: relative;
+  border: 0;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: 1.75rem;
+  height: 1.75rem;
 }
 
 #result .key:focus,
@@ -132,6 +138,67 @@ footer {
   background: #aaddff;
   cursor: pointer;
   z-index: 2;
+}
+
+#result .key:focus {
+  outline: none;
+  filter: drop-shadow(-1px 0 red) drop-shadow(1px 0 red) drop-shadow(0 -1px red)
+    drop-shadow(0 1px red);
+  z-index: 1;
+}
+
+#result .key:focus::after,
+#result .key:hover::after {
+  content: "▾";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 1px;
+  height: 100%;
+  background: #aaddff;
+  transform: translate(100%, 0);
+  padding: 0 0.35rem;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  border-radius: 0 2px 2px 0;
+}
+
+#replacement-info {
+  background: #aaddff;
+  position: absolute;
+  padding: 0.5rem;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  min-width: 200px;
+  transform: translate(0, 1.75rem);
+  box-sizing: border-box;
+  z-index: 2;
+  display: none;
+}
+
+#replacement-info h2 {
+  font-size: 0.875rem;
+  font-weight: 300;
+  margin: 0;
+}
+
+#replacement-info .term {
+  font-size: 1.25rem;
+  font-weight: 400;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  border: 0;
+  margin-bottom: 0.75rem;
+}
+
+#replacement-info .term:last-child {
+  margin-bottom: 0;
+}
+
+#replacement-info .term.focused {
+  outline: 1px dashed red;
+  outline-offset: 2px;
 }
 
 @media all and (min-width: 600px) {
