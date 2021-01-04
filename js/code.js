@@ -44,9 +44,12 @@ const dwindle = {
       if (dictionary) {
         const keys = Object.keys(dictionary);
         for (let x = 0; x < keys.length; x++) {
-          const pattern = ` ${keys[x]} `;
+          const group = "([ \\r\\n\\s\\.\\-\\+!@#$%^&*,])";
+          const pattern = `${group}${keys[x]}${group}`;
           const regexp = new RegExp(pattern, "gi");
-          text = text.replace(regexp, ` ${dictionary[keys[x]]} `);
+          text = text.replace(regexp, function (match, group1, group2) {
+            return `${group1}${dictionary[keys[x]]}${group2}`;
+          });
         }
       }
     }
