@@ -7,6 +7,7 @@ const dwindle = {
     fromCount: document.querySelector("#text-count"),
     toCount: document.querySelector("#result-count")
   },
+  language: "en",
   languages: ["en"],
   types: ["numbers", "ordinals"],
   loaded: 0,
@@ -36,9 +37,27 @@ const dwindle = {
       }
     }
   },
+  // actual replacement function!
+  replace: function (text, language, type) {
+    const dictionary = dwindle.data[language][type];
+    if (dictionary) {
+      const keys = Object.keys(dictionary);
+      for (let x = 0; x < keys.length; x++) {
+        const pattern = ` ${keys[x]} `;
+        const regexp = new RegExp(pattern, "gi");
+        text = text.replace(regexp, ` ${dictionary[keys[x]]} `);
+      }
+    }
+    return text;
+  },
   // the reduction/dwindling function
   dwindle: function (text) {
-    return text.replace(/ one /ig, " <span class='key' data-original='one'>1</span> ");
+    for (let x = 0; x < dwindle.types.length; x++) {
+      if (text.length > 280) {
+        text = dwindle.replace(text, dwindle.language, dwindle.types[x]);
+      }
+    }
+    return text;
   },
   // component initialization: add events, load data, etc.
   init: function () {
