@@ -9,7 +9,7 @@ const dwindle = {
   },
   language: "en",
   languages: ["en"],
-  types: ["numbers", "ordinals", "popular"],
+  types: ["numbers", "ordinals", "popular", "corporations"],
   loaded: 0,
   data: {},
   // load ALL the data from the JSON files
@@ -76,6 +76,7 @@ const dwindle = {
         dwindle.elements.toBox.innerHTML = transformedText;
         dwindle.elements.toBox.classList.add("processed");
         dwindle.elements.toCount.textContent = dwindle.elements.toBox.textContent.length;
+        dwindle.elements.toBox.focus();
       } else {
         dwindle.elements.toBox.innerHTML = "";
         dwindle.elements.toBox.classList.remove("processed");
