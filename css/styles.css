@@ -125,10 +125,10 @@ footer {
 
 #result .key {
   display: inline-block;
-  background: #cdf2f8; #beeeef;
+  background: #cdf2f8;
   padding: 0 0.35rem;
   box-sizing: border-box;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
   border-radius: 2px;
   position: relative;
   border: 0;
@@ -141,15 +141,12 @@ footer {
 
 #result .key:focus,
 #result .key:hover {
-  background: #dcf2f7;
+  background: #ffd;
   cursor: pointer;
   z-index: 2;
 }
 
 #result .key:focus {
-  aoutline: none;
-  afilter: drop-shadow(-1px 0 red) drop-shadow(1px 0 red) drop-shadow(0 -1px red)
-    drop-shadow(0 1px red);
   z-index: 1;
 }
 
@@ -159,21 +156,22 @@ footer {
   display: block;
   position: absolute;
   top: 0;
-  right: 1px;
+  right: 2px;
   height: 100%;
-  background: #dcf2f7;
+  background: #ffd; /* #dcf2f7; */
   transform: translate(100%, 0);
   padding: 0 0.5rem;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
   border-radius: 0 2px 2px 0;
   font-size: 0.5rem;
+  z-index: -1;
 }
 
 #replacement-info {
-  background: #dcf2f7;
+  background: #ffd;
   position: absolute;
   padding: 0.5rem;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
   border-radius: 2px;
   min-width: 200px;
   transform: translate(0, 1.75rem);
@@ -222,9 +220,17 @@ footer {
   text-decoration: none;
   cursor: pointer;
   margin: 1rem auto;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 400;
   border-radius: 0.125rem;
+}
+
+#tweet-button::after {
+  content: "\25B6";
+  font-size: 0.5em;
+  margin-left: 0.5rem;
+  display: inline-block;
+  transform: translate(0, -0.125rem);
 }
 
 #tweet-button:hover {
