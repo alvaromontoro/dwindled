@@ -14,6 +14,11 @@ body {
   flex-direction: column;
 }
 
+*:focus {
+  outline: 1px dashed #369;
+  outline-offset: 2px;
+}
+
 main {
   flex: 1;
 }
@@ -25,7 +30,7 @@ p {
 }
 
 header {
-  position: sticky;
+  position: relative;
   height: 3rem;
   margin-top: 5rem;
   top: 0;
@@ -202,12 +207,16 @@ footer {
   outline-offset: 2px;
 }
 
+#tweet-button-container {
+  text-align: right;
+  margin: 1rem 0;
+  visibility: hidden;
+}
+
 #tweet-button {
-  float: right;
   background: #147ac8;
   color: white;
-  padding: 0.25rem 1rem;
-  height: 1.75rem;
+  padding: 0.5rem 1rem;
   line-height: 1.75rem;
   text-decoration: none;
   cursor: pointer;
@@ -215,11 +224,44 @@ footer {
   font-size: 1.125rem;
   font-weight: 400;
   border-radius: 0.125rem;
-  visibility: hidden;
 }
 
 #tweet-button:hover {
   opacity: 0.9;
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem auto 3rem auto;
+}
+
+.info > div {
+  width: 225px;
+  margin: 1rem;
+  text-align: center;
+}
+
+.info div:hover img {
+  opacity: 1;
+}
+
+.info img {
+  opacity: 0.5;
+  width: 33%;
+  margin: auto auto;
+}
+
+.info h2 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+.info p {
+  text-align: center;
+  font-size: 1rem;
 }
 
 @media all and (min-width: 600px) {
@@ -244,6 +286,17 @@ footer {
     text-align: center;
     margin: 0;
     background: white;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='75px' height='75px' viewBox='0 0 100 100'><path d='M33,20 58,50 33,80 M58,25 77,50 58,75' fill='none' stroke='%23888' stroke-width='4' /></svg>");
+    background-position: center center;
+    background-size: cover;
+  }
+
+  #dwindle-button span {
+    position: absolute;
+    left: -1000in;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
 
   #text {

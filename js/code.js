@@ -8,7 +8,7 @@ const dwindle = {
     toCount: document.querySelector("#result-count"),
     bubble: document.querySelector("#replacement-info"),
     screenreader: document.querySelector("#screen-reader"),
-    tweetButton: document.querySelector("#tweet-button")
+    tweetButton: document.querySelector("#tweet-button-container")
   },
   language: "en",
   languages: ["en"],
@@ -82,7 +82,7 @@ const dwindle = {
         this.elements.toCount.textContent = this.elements.toBox.textContent.length;
         this.elements.toBox.focus();
         if (this.elements.toBox.textContent.length <= 280) {
-          this.elements.tweetButton.setAttribute("href", `https://twitter.com/intent/tweet?text=${encodeURI(this.elements.toBox.textContent.trim())}`);
+          this.elements.tweetButton.querySelector("a").setAttribute("href", `https://twitter.com/intent/tweet?text=${encodeURI(this.elements.toBox.textContent.trim())}&url=`);
           this.elements.tweetButton.style.visibility = "visible";
         } else {
           this.elements.tweetButton.style.visibility = "hidden";
@@ -121,6 +121,8 @@ const dwindle = {
         this.elements.bubble.style = "";
       }
     });
+
+    this.elements.toBox.addEventListener("scroll", () => { this.elements.bubble.style = ""; });
     window.addEventListener("scroll", () => { this.elements.bubble.style = ""; });
     window.addEventListener("resize", () => { this.elements.bubble.style = ""; });
   }
