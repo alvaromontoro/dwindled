@@ -17,6 +17,7 @@ body {
 *:focus {
   outline: 1px dashed #369;
   outline-offset: 2px;
+  z-index: 1;
 }
 
 main {
@@ -124,7 +125,7 @@ footer {
 
 #result .key {
   display: inline-block;
-  background: #beeeef;
+  background: #cdf2f8; #beeeef;
   padding: 0 0.35rem;
   box-sizing: border-box;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
@@ -140,14 +141,14 @@ footer {
 
 #result .key:focus,
 #result .key:hover {
-  background: #aaddff;
+  background: #dcf2f7;
   cursor: pointer;
   z-index: 2;
 }
 
 #result .key:focus {
-  outline: none;
-  filter: drop-shadow(-1px 0 red) drop-shadow(1px 0 red) drop-shadow(0 -1px red)
+  aoutline: none;
+  afilter: drop-shadow(-1px 0 red) drop-shadow(1px 0 red) drop-shadow(0 -1px red)
     drop-shadow(0 1px red);
   z-index: 1;
 }
@@ -160,7 +161,7 @@ footer {
   top: 0;
   right: 1px;
   height: 100%;
-  background: #aaddff;
+  background: #dcf2f7;
   transform: translate(100%, 0);
   padding: 0 0.5rem;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
@@ -169,7 +170,7 @@ footer {
 }
 
 #replacement-info {
-  background: #aaddff;
+  background: #dcf2f7;
   position: absolute;
   padding: 0.5rem;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
@@ -275,7 +276,7 @@ footer {
     top: 50%;
     transform: translate(-50%, -50%);
     transform: translate(-50%, calc(-50% - 0.5rem));
-    z-index: 1;
+    z-index: 2;
     border-radius: 50%;
     border: 1px solid #bbb;
     width: 4rem;
