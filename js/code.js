@@ -15,8 +15,8 @@ const dwindle = {
   language: "en",
   languages: ["en"],
   types: [
-    "numbers", "ordinals", "popular",
-    "corporations", "sports", "contractions"
+    "numbers", "ordinals", "popular", "corporations",
+    "sports", "contractions", "emojis"
   ],
   loaded: 0,
   activeKey: null,
@@ -64,7 +64,7 @@ const dwindle = {
       if (dictionary) {
         const keys = Object.keys(dictionary);
         for (let x = 0; x < keys.length; x++) {
-          const group = "([ \\r\\n\\s\\.\\-\\+\\?¡¿!@#$%^&*,])";
+          const group = "([ \\r\\n\\s\\.\\-\\+\\?:¡¿!@#$%^&*,])";
           const pattern = `${group}${keys[x]}${group}`;
           const regexp = new RegExp(pattern, "gi");
           text = text.replace(regexp, function (match, group1, group2) {
