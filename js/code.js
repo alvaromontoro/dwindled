@@ -14,7 +14,10 @@ const dwindle = {
   },
   language: "en",
   languages: ["en"],
-  types: ["numbers", "ordinals", "popular", "corporations"],
+  types: [
+    "numbers", "ordinals", "popular",
+    "corporations", "sports", "contractions"
+  ],
   loaded: 0,
   activeKey: null,
   activeMenu: -1,
@@ -99,9 +102,9 @@ const dwindle = {
   dwindle: function (text) {
     text = ` ${text.replace(/\</g, "&lt;").replace(/\>/g, "&gt;")} `;
     for (let x = 0; x < this.types.length; x++) {
-      if (text.length > 280) {
+      //if (text.length > 280) {
         text = this.replace(text, this.language, this.types[x]);
-      }
+      //}
     }
     return text.trim();
   },
