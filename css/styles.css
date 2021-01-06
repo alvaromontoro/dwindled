@@ -139,11 +139,15 @@ footer {
   height: 1.75rem;
 }
 
+#result .key[data-isoriginal="true"] {
+  background: #dfd;
+}
+
 #result .key:focus,
 #result .key:hover {
   background: #ffd;
   cursor: pointer;
-  z-index: 2;
+  z-index: 3;
 }
 
 #result .key:focus {
@@ -178,6 +182,7 @@ footer {
   box-sizing: border-box;
   z-index: 2;
   display: none;
+  margin-top: -1px;
 }
 
 #replacement-info h2 {
@@ -195,6 +200,7 @@ footer {
   font-family: inherit;
   border: 0;
   margin-bottom: 0.75rem;
+  cursor: pointer;
 }
 
 #replacement-info .term:last-child {
@@ -202,8 +208,9 @@ footer {
 }
 
 #replacement-info .term.focused {
-  outline: 1px dashed red;
+  outline: 1px dashed #369;
   outline-offset: 2px;
+  background: rgba(0, 0, 0, 0.05);
 }
 
 #tweet-button-container {
