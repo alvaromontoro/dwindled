@@ -113,14 +113,21 @@ footer {
 
 #dwindle-button {
   margin: 0.5rem 0;
+  background: #369;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 300;
+  border: 0;
+  padding: 0.5rem;
+  border-radius: 0.125rem;
 }
 
 .count {
-  font-size: 0.75rem;
+  font-size: 0.825rem;
   color: #444;
   text-align: right;
-  line-height: 1rem;
-  height: 1rem;
+  line-height: 1.25rem;
+  height: 1.25rem;
 }
 
 #result .key {
@@ -285,6 +292,7 @@ footer {
 
   #dwindle-button {
     position: absolute;
+    color: inherit;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
