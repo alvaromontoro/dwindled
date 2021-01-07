@@ -1,6 +1,6 @@
 // code adapted from https://dev.to/ibrahima92/how-to-build-a-pwa-from-scratch-with-html-css-and-javascript-4bg5
 const staticDwindle = "dev-dwindle-site-v1";
-const assets = [
+const urlsToCache = [
   "/",
   "/index.html",
   "/fav.ico",
@@ -20,20 +20,20 @@ const assets = [
   "/data/en/sports.json"
 ];
 
-self.addEventListener("install", (installEvent) => {
-  installEvent.waitUntil(
-    caches.open(staticDwindle).then(cache => {
-      if (cache && cache.addAll) {
-        cache.addAll(assets)
-      }
+self.addEventListener("install", function(event) {
+  // Perform install steps
+  event.waitUntil(
+    caches.open(staticDwindle).then(function(cache) {
+      console.log("Opened cache");
+      return cache.addAll(urlsToCache);
     })
   );
 });
 
-self.addEventListener("fetch", fetchEvent => {
-  fetchEvent.respondWith(
-    caches.match(fetchEvent.request).then(res => {
-      return res || fetch(fetchEvent.request)
+self.addEventListener("fetch", function(event) {
+  event.respondWith(
+    fetch(event.request).catch(function() {
+      return caches.match(event.request);
     })
   );
 });
