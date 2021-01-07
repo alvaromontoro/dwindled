@@ -285,6 +285,40 @@ footer {
   font-size: 1rem;
 }
 
+details {
+  margin-bottom: 0.5rem;
+}
+
+summary {
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.settings {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 1rem;
+  background: #f5f8fa;
+}
+
+.settings h2 {
+  font-size: 1.125rem;
+  font-weight: 400;
+  margin: 0.25rem 0 0.5rem 0;
+}
+
+.settings > div {
+  min-width: 15rem;
+  margin-right: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.settings label {
+  display: inline-block;
+  margin-right: 0.75rem;
+}
+
 @media all and (min-width: 600px) {
   .form-control {
     grid-template-columns: repeat(2, 1fr);

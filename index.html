@@ -41,6 +41,47 @@
           Write your text in the box below,  then click on the button and the text will be shrunk... just like magic! 
           (but with a little bit of technology)
         </p>
+        <details>
+          <summary>Options</summary>
+          <div class="settings">
+            <div>
+              <h2>Categories</h2>
+              <label>
+                <input id="dictionary-popular" type="checkbox" checked /> Celebrities
+              </label>
+              <label>
+                <input id="dictionary-contractions" type="checkbox" checked /> Contractions
+              </label>
+              <label>
+                <input id="dictionary-corportations" type="checkbox" checked /> Corporations
+              </label>
+              <label>
+                <input id="dictionary-numbers" type="checkbox" checked /> Numbers
+              </label>
+              <label>
+                <input id="dictionary-ordinals" type="checkbox" checked /> Ordinals
+              </label>
+              <label>
+                <input id="dictionary-sports" type="checkbox" checked /> Sports
+              </label>
+              <label>
+                <input id="dictionary-emojis" type="checkbox" checked /> Emojis
+              </label>
+            </div>
+            <div>
+              <h2 id="setting-language-title">Language</h2>
+              <select aria-labelledby="setting-language-title">
+                <option id="setting-language" value="en" selected>English</option>
+              </select>
+            </div>
+            <div>
+              <h2>Extensive replacements</h2>
+              <label>
+                <input id="dictionary-aggressive" type="checkbox" checked /> Dwindling will continue even after reaching 280 characters
+              </label>
+            </div>
+          </div>
+        </details>
         <div class="form-control">
           <textarea name="text" id="text" aria-label="Initial text" placeholder="Write the text to dwindle"></textarea>
           <div class="count">Characters: <span id="text-count">0</span>.</div>

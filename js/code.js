@@ -15,9 +15,19 @@ const dwindle = {
   language: "en",
   languages: ["en"],
   types: [
-    "numbers", "ordinals", "popular", "corporations",
-    "sports", "contractions", "emojis"
+    "popular", "contractions", "corporations", 
+    "numbers", "ordinals", "sports", "emojis"
   ],
+  settings: {
+    aggressive: true,
+    numbers: true,
+    ordinals: true,
+    popular: true,
+    corporations: true,
+    sports: true,
+    contractions: true,
+    emojis: true
+  },
   loaded: 0,
   activeKey: null,
   activeMenu: -1,
@@ -100,17 +110,28 @@ const dwindle = {
   },
   // the reduction/dwindling function
   dwindle: function (text) {
-    text = ` ${text.replace(/\</g, "&lt;").replace(/\>/g, "&gt;")} `;
+    let newText = ` ${text.replace(/\</g, "&lt;").replace(/\>/g, "&gt;")} `;
     for (let x = 0; x < this.types.length; x++) {
-      //if (text.length > 280) {
-        text = this.replace(text, this.language, this.types[x]);
-      //}
+      let textSanitized = newText.replace(/(<([^>]+)>)/ig, "").trim();
+      if (textSanitized.length > 280 || this.settings.aggressive) {
+        if (this.settings[this.types[x]]) {
+          newText = this.replace(newText, this.language, this.types[x]);
+        }
+      }
     }
-    return text.trim();
+    return newText.trim();
   },
   // component initialization: add events, load data, etc.
   init: function () {
     this.loadData();
+
+    const checkboxes = document.querySelectorAll("input[type='checkbox']");
+    for (let x = 0; x < checkboxes.length; x++) {
+      checkboxes[x].addEventListener("change", () => {
+        const id = checkboxes[x].id.replace("dictionary-", "");
+        this.settings[id] = checkboxes[x].checked;
+      })
+    }
 
     this.elements.button.addEventListener("click", () => {
       const originalText = this.elements.fromBox.value.trim();
